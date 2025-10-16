@@ -1,0 +1,14 @@
+Panduan Publish Menggunakan GitHub Pages
+---------------------------------------
+
+1. Buat akun GitHub (https://github.com) jika belum punya.
+2. Login, lalu klik 'New repository' → beri nama (misal: smart-steps-tka) → pilih 'Public' → Create repository.
+3. Di halaman repo, klik 'Add file' → 'Upload files' → pilih Smart_Steps_TKA_Session1.html → Commit changes.
+4. Buka Settings → Pages (atau Pages di sidebar) → Under 'Build and deployment' pilih 'Deploy from a branch' → Branch: main (atau default) → Save.
+5. Setelah beberapa menit, GitHub Pages akan menyediakan alamat seperti: https://<username>.github.io/<repo-name>/Smart_Steps_TKA_Session1.html
+6. Salin link tersebut dan bagikan ke siswa.
+7. Untuk menambahkan Session 2–4: upload file HTML tambahan (mis: Smart_Steps_TKA_Session2.html) dan berikan link masing-masing.
+
+Catatan:
+- GitHub Pages gratis untuk repositori publik.
+- Jika ingin domain khusus, Anda bisa atur custom domain di Settings → Pages.

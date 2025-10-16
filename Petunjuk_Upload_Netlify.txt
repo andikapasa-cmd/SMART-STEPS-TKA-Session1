@@ -1,0 +1,13 @@
+Panduan Upload Ke Netlify (cara cepat - drag & drop)
+--------------------------------------------------
+
+1. Buka: https://www.netlify.com/drop
+2. Ekstrak file ZIP yang Anda download (SMART_STEPS_TKA_Session1_RahmadAndika.zip).
+3. Di halaman netlify drop, seret file Smart_Steps_TKA_Session1.html ke area 'Drop your site output here'.
+4. Tunggu Netlify meng-upload dan memproses. Setelah selesai, Netlify akan memberikan URL publik (misal https://amazing-klepon-12345.netlify.app).
+5. Salin URL tersebut dan bagikan ke siswa lewat WhatsApp/Telegram/Google Classroom.
+6. Keterangan:
+   - Tidak perlu akun untuk upload via /drop, tapi link yang dihasilkan bersifat sementara jika tidak dikaitkan ke akun. Untuk kontrol lebih lanjut, buat akun Netlify gratis dan drag folder/zip ke dashboard Anda.
+   - Jika ingin menambah Session 2, unggah file HTML tambahan atau satukan beberapa session dalam folder dan upload seluruh folder.
+
+Catatan: Metode ini paling cepat untuk publikasi satu file HTML. Untuk manajemen versi dan beberapa sesi, gunakan GitHub Pages.
