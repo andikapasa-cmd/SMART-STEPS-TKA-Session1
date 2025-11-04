@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMART STEPS – SESSION 2</title>
+<style>
+body{font-family:Arial;padding:20px;background:#f3f7ff;}
+.box{background:white;padding:20px;border-radius:12px;box-shadow:0 0 5px rgba(0,0,0,0.2);margin-bottom:20px;}
+button{padding:10px 20px;background:#0b67d1;border:none;color:white;border-radius:6px;}
+</style>
+</head>
+<body>
+<h2>SMART STEPS – SESSION 2</h2>
+<div id="quiz"></div>
+<script>
+const questions=[
+{passage:"The school posted a notice: 'Students must submit the science project by Friday.'",question:"1. What type of text is this?",options:["Warning","Announcement","Instruction","Invitation","Report"],answer:1},
+{passage:"Sample passage 2",question:"2. What category does this text belong to?",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:2},
+{passage:"Sample passage 3",question:"3. What category?",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:3},
+{passage:"Sample passage 4",question:"4. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:1},
+{passage:"Sample passage 5",question:"5. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:0},
+{passage:"Sample passage 6",question:"6. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:4},
+{passage:"Sample passage 7",question:"7. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:0},
+{passage:"Sample passage 8",question:"8. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:3},
+{passage:"Sample passage 9",question:"9. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:1},
+{passage:"Sample passage 10",question:"10. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:2},
+{passage:"Sample passage",question:"11. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:3},
+{passage:"Sample passage",question:"12. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:4},
+{passage:"Sample passage",question:"13. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:1},
+{passage:"Sample passage",question:"14. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:0},
+{passage:"Sample passage",question:"15. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:2},
+{passage:"Sample passage",question:"16. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:1},
+{passage:"Sample passage",question:"17. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:4},
+{passage:"Sample passage",question:"18. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:3},
+{passage:"Sample passage",question:"19. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:0},
+{passage:"Sample passage",question:"20. Choose correct category.",options:["Announcement","Instruction","Warning","Advertisement","Report"],answer:2}
+];
+
+let i=0,score=0;
+function load(){
+ if(i>=questions.length){
+   document.body.innerHTML=`<h2>Score Anda: ${score} / ${questions.length}</h2>`;
+   return;
+ }
+ const q=questions[i];
+ let h=`<div class='box'><b>${q.question}</b><p>${q.passage}</p>`;
+ q.options.forEach((o,j)=>h+=`<label><input type='radio' name='opt' value='${j}'> ${o}</label><br>`);
+ h+=`<br><button onclick='next()'>Next</button></div>`;
+ document.getElementById("quiz").innerHTML=h;
+}
+function next(){
+ const sel=document.querySelector("input[name='opt']:checked");
+ if(sel && parseInt(sel.value)===questions[i].answer)score++;
+ i++; load();
+}
+load();
+</script>
+</body>
+</html>
