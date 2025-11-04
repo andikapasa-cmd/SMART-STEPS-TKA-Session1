@@ -1,120 +1,263 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SMART STEPS – SESSION 3</title>
-<style>
-body{font-family:Arial;padding:20px;background:#f3f7ff;}
-.box{background:white;padding:20px;border-radius:12px;box-shadow:0 0 5px rgba(0,0,0,0.15);margin-bottom:20px;}
-button{padding:10px 20px;background:#0b67d1;border:none;color:white;border-radius:6px;}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SMART STEPS – SESSION 3 (Menyusun Kerangka Isi Teks)</title>
+  <style>
+    :root{--bg:#f7fbff;--card:#fff;--accent:#0b67d1;--muted:#6b7280}
+    *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, Roboto, 'Segoe UI', Arial}
+    body{margin:0;background:var(--bg);color:#0f172a}
+    .wrap{max-width:820px;margin:20px auto;padding:16px}
+    header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:6px 0 12px;color:var(--muted)}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(9,30,66,0.06)}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:12px}
+    .progress{height:8px;background:#e6eefc;border-radius:999px;overflow:hidden;margin-bottom:12px}
+    .bar{height:100%;background:linear-gradient(90deg,var(--accent),#4f46e5);width:0%}
+    .passage{padding:12px;border-left:4px solid #e6edf8;background:#fbfdff;border-radius:8px;margin-bottom:12px}
+    .question{margin:8px 0 14px;font-weight:600}
+    .options{display:grid;gap:8px}
+    .opt{padding:10px;border-radius:8px;border:1px solid #e6edf8;background:white;cursor:pointer}
+    .opt.selected{border-color:var(--accent);box-shadow:0 6px 20px rgba(11,110,240,0.12)}
+    .controls{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+    button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer}
+    button.secondary{background:transparent;color:var(--accent);border:1px solid rgba(11,110,240,0.12)}
+    .score{font-size:18px;font-weight:700;text-align:center;padding:28px}
+    footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
+    @media (max-width:480px){.wrap{padding:10px}h1{font-size:18px}}
+  </style>
 </head>
 <body>
-<h2>SMART STEPS – SESSION 3</h2>
-<div id="quiz"></div>
+  <div class="wrap card">
+    <header>
+      <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,#eef6ff,#e6f0ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)">SS</div>
+      <div style="flex:1;min-width:220px">
+        <h1>SMART STEPS – SESSION 3</h1>
+        <p class="lead">Menyusun Kerangka Isi Teks — 20 soal. Buka lewat HP. (Bahasa campuran)</p>
+        <div class="meta"><em>Disusun oleh: Lina Puspita Dewi</em> • <strong>Pengajar & Pemilik Kuis: Rahmad Andika Pasa, S.Pd.Gr.</strong></div>
+      </div>
+    </header>
+
+    <div style="margin-top:12px">
+      <div class="progress"><div class="bar" id="prog"></div></div>
+      <div id="quiz-area"></div>
+      <div class="controls" id="controls"></div>
+    </div>
+
+    <footer>
+      <small>Soal bertipe sequencing: susun urutan paragraf/kejadian agar menjadi teks yang runtut. Hanya skor akhir yang muncul setelah submit.</small>
+    </footer>
+  </div>
 
 <script>
+/*
+ Session 3 — Menyusun Kerangka Isi Teks
+ Format: each question has a short set of numbered sentences (1,2,3).
+ Question asks correct sequence. Options are orderings like "1-2-3".
+ Use backtick strings to avoid quote issues.
+*/
 const questions = [
- {passage:"(1) She practiced every day. (2) Siti won the speech contest. (3) Her teacher congratulated her.",
- question:["1. Arrange the correct order."],
- options:["2-1-3","1-2-3","3-2-1","2-3-1","1-3-2"], answer:1},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["2. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:0},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["3. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:1},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["4. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:2},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["5. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:3},
- {passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["6. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:4},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["7. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:0},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["8. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:1},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["9. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:2},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["10. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:3},
- {passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["11. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:4},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["12. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:0},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["13. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:1},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["14. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:2},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["15. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:3},
- {passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["16. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:4},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["17. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:0},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["18. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:1},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["19. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:2},
-
-{passage:"(1) Event A. (2) Event B. (3) Event C.",
- question:["20. What is the correct sequence?"],
- options:["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"], answer:3}
+  {
+    passage: `(1) Lina practiced every evening in front of a mirror. (2) On the day of the competition, she gave a confident performance. (3) She had prepared her speech and practiced daily for weeks.`,
+    question: `1. Which sequence is correct?`,
+    options: ["1-2-3","3-1-2","2-3-1","3-2-1","2-1-3"],
+    answer: 1
+  },
+  {
+    passage: `(1) The cake was baked at 350°F for 30 minutes. (2) First, the baker mixed flour, eggs, and sugar. (3) Finally, the guests enjoyed the warm cake.`,
+    question: `2. Arrange the events in order.`,
+    options: ["2-1-3","1-3-2","3-2-1","2-3-1","1-2-3"],
+    answer: 0
+  },
+  {
+    passage: `(1) After the rain, the children washed their hands. (2) They had played soccer in the muddy field. (3) Their coach called them to clean up before going home.`,
+    question: `3. Which order makes a coherent paragraph?`,
+    options: ["2-3-1","1-2-3","3-1-2","2-1-3","1-3-2"],
+    answer: 0
+  },
+  {
+    passage: `(1) She read the instructions carefully. (2) Maria completed the model airplane successfully. (3) Maria gathered all the parts before starting the work.`,
+    question: `4. What is the correct sequence?`,
+    options: ["3-1-2","1-3-2","2-1-3","3-2-1","1-2-3"],
+    answer: 0
+  },
+  {
+    passage: `(1) The alarm rang and everyone evacuated the building. (2) Firefighters arrived and checked all rooms. (3) A small fire started in the chemistry lab due to a broken bottle.`,
+    question: `5. Arrange the sentences into the proper order.`,
+    options: ["3-1-2","1-2-3","2-3-1","3-2-1","1-3-2"],
+    answer: 0
+  },
+  {
+    passage: `(1) The student returned the lost wallet to the office. (2) The owner was surprised and grateful. (3) He had found the wallet on the school gate earlier.`,
+    question: `6. Which is the best sequence?`,
+    options: ["3-1-2","1-3-2","2-1-3","3-2-1","1-2-3"],
+    answer: 0
+  },
+  {
+    passage: `(1) We invited guests, prepared the food, and decorated the hall. (2) The wedding ceremony began with a beautiful song. (3) The couple exchanged vows in front of family and friends.`,
+    question: `7. Choose the correct order of events.`,
+    options: ["1-3-2","3-1-2","1-2-3","2-3-1","3-2-1"],
+    answer: 2
+  },
+  {
+    passage: `(1) The gardener planted seeds in neat rows. (2) After several weeks, small shoots appeared. (3) He watered the soil daily to help the seeds grow.`,
+    question: `8. Which sequence is logical?`,
+    options: ["1-3-2","3-1-2","1-2-3","2-3-1","3-2-1"],
+    answer: 0
+  },
+  {
+    passage: `(1) The coach explained the rules of the game. (2) The team warmed up and practiced passing. (3) Finally, they started the match with full energy.`,
+    question: `9. Arrange the sentences in the correct order.`,
+    options: ["1-2-3","2-1-3","3-2-1","1-3-2","2-3-1"],
+    answer: 0
+  },
+  {
+    passage: `(1) A notice appeared on the board about the science fair. (2) Students began preparing models and experiments. (3) The principal opened the fair and invited visitors.`,
+    question: `10. Which order forms a coherent paragraph?`,
+    options: ["1-2-3","2-1-3","3-2-1","2-3-1","1-3-2"],
+    answer: 0
+  },
+  {
+    passage: `(1) First, scan the QR code and fill in the attendance. (2) The students signed the register manually if the QR failed. (3) The teacher reminded everyone to arrive on time.`,
+    question: `11. What is the logical sequence?`,
+    options: ["3-1-2","1-2-3","2-1-3","1-3-2","2-3-1"],
+    answer: 0
+  },
+  {
+    passage: `(1) He opened the shop early in the morning. (2) Many customers came to buy fresh bread. (3) He prepared the dough and baked the bread the night before.`,
+    question: `12. Arrange the events correctly.`,
+    options: ["3-1-2","1-3-2","2-3-1","3-2-1","1-2-3"],
+    answer: 0
+  },
+  {
+    passage: `(1) After the test, students discussed the answers in groups. (2) The teacher explained the solutions and gave feedback. (3) They finished the exam and submitted their papers.`,
+    question: `13. Which order makes sense?`,
+    options: ["3-1-2","1-2-3","2-3-1","3-2-1","1-3-2"],
+    answer: 0
+  },
+  {
+    passage: `(1) The library organized a reading contest. (2) Winners received trophies and books. (3) Many students read daily to prepare for the contest.`,
+    question: `14. Arrange the sentences in the most logical order.`,
+    options: ["3-1-2","1-3-2","2-1-3","1-2-3","3-2-1"],
+    answer: 0
+  },
+  {
+    passage: `(1) After the movie, they went to a café to talk. (2) The friends met at the cinema at 7 PM. (3) They bought tickets and entered the theater.`,
+    question: `15. What is the correct sequence?`,
+    options: ["2-3-1","3-2-1","1-2-3","2-1-3","3-1-2"],
+    answer: 0
+  },
+  {
+    passage: `(1) The teacher announced a surprise quiz. (2) Students were nervous but tried their best. (3) The following day, the teacher returned graded quizzes and praised improvements.`,
+    question: `16. Choose the best order.`,
+    options: ["1-2-3","2-1-3","3-1-2","1-3-2","2-3-1"],
+    answer: 0
+  },
+  {
+    passage: `(1) The volunteer collected donations at the school gate. (2) Later, they bought books and distributed them to the shelter. (3) The community organized a charity drive to help children.`,
+    question: `17. Arrange the sentences in natural order.`,
+    options: ["3-1-2","1-2-3","2-3-1","3-2-1","1-3-2"],
+    answer: 0
+  },
+  {
+    passage: `(1) The artist sketched a design. (2) He painted the mural carefully the next week. (3) The town council approved the mural project earlier this month.`,
+    question: `18. What order is logical?`,
+    options: ["3-1-2","1-2-3","2-3-1","1-3-2","3-2-1"],
+    answer: 0
+  },
+  {
+    passage: `(1) He returned home and put the groceries away. (2) She wrote a shopping list and checked the pantry. (3) They went to the market to buy ingredients for dinner.`,
+    question: `19. Arrange the steps in the right order.`,
+    options: ["2-3-1","3-2-1","1-2-3","3-1-2","2-1-3"],
+    answer: 0
+  },
+  {
+    passage: `(1) The principal cut the ribbon to open the new lab. (2) Before that, guests and students gathered for the ceremony. (3) The lab windows were cleaned and the equipment prepared.`,
+    question: `20. Which sequence is most appropriate?`,
+    options: ["3-2-1","2-3-1","1-2-3","2-1-3","3-1-2"],
+    answer: 0
+  }
 ];
 
-let i = 0, score = 0;
+// state
+let idx = 0;
+const answers = new Array(questions.length).fill(null);
 
-function load(){
- if(i >= questions.length){
-   document.body.innerHTML = `<h2>Score Anda: ${score} / ${questions.length}</h2>`;
-   return;
- }
- const q = questions[i];
- let h = `<div class='box'><b>${q.question}</b><p>${q.passage}</p>`;
- q.options.forEach((o,j)=> h += `<label><input type='radio' name='opt' value='${j}'> ${o}</label><br>`);
- h += `<br><button onclick='next()'>Next</button></div>`;
- document.getElementById("quiz").innerHTML = h;
+const quizArea = document.getElementById('quiz-area');
+const controls = document.getElementById('controls');
+const prog = document.getElementById('prog');
+
+function renderQuestion(i){
+  const q = questions[i];
+  prog.style.width = `${Math.round((i)/questions.length*100)}%`;
+  quizArea.innerHTML = `
+    <div class="passage"><strong>Passage:</strong><div style="margin-top:6px">${escapeHtml(q.passage)}</div></div>
+    <div class="question">${escapeHtml(q.question)}</div>
+    <div class="options" id="opts"></div>
+  `;
+  const opts = document.getElementById('opts');
+  q.options.forEach((opt,j)=>{
+    const d = document.createElement('div');
+    d.className = 'opt' + (answers[i]===j? ' selected':'');
+    d.tabIndex = 0;
+    d.innerText = String.fromCharCode(65+j) + '. ' + opt;
+    d.addEventListener('click',()=>{ selectOption(i,j); });
+    d.addEventListener('keydown',(e)=>{ if(e.key==='Enter') selectOption(i,j); });
+    opts.appendChild(d);
+  });
+
+  controls.innerHTML = '';
+  const back = document.createElement('button'); back.className='secondary'; back.innerText='Kembali';
+  back.disabled = (i===0);
+  back.addEventListener('click',()=>{ idx--; renderQuestion(idx); });
+  const next = document.createElement('button'); next.innerText = (i===questions.length-1? 'Kirim' : 'Selanjutnya');
+  next.addEventListener('click',()=>{ 
+    if(i===questions.length-1){ submitQuiz(); } else { idx++; renderQuestion(idx); } 
+  });
+  controls.appendChild(back);
+  controls.appendChild(next);
 }
 
-function next(){
- const sel = document.querySelector("input[name='opt']:checked");
- if(sel && parseInt(sel.value) === questions[i].answer) score++;
- i++; load();
+function selectOption(qIndex,optIndex){
+  answers[qIndex]=optIndex;
+  renderQuestion(qIndex);
 }
 
-load();
+function submitQuiz(){
+  // compute score
+  let score = 0;
+  for(let i=0;i<questions.length;i++){
+    if(answers[i] === questions[i].answer) score++;
+  }
+  prog.style.width = '100%';
+  quizArea.innerHTML = `<div class="score">Selesai!<br>Skor Anda: ${score}/${questions.length}</div>`;
+  controls.innerHTML = `<button onclick="restart()">Coba Lagi</button><button class='secondary' onclick="showAnswers()">Lihat Kunci</button>`;
+}
+
+function restart(){
+  for(let i=0;i<answers.length;i++) answers[i]=null;
+  idx=0; renderQuestion(0);
+}
+
+function showAnswers(){
+  let html = '<div style="padding:12px"><h3>Jawaban Benar</h3><ol>';
+  for(let i=0;i<questions.length;i++){
+    const correct = questions[i].answer;
+    html += `<li>Question ${i+1}: ${String.fromCharCode(65+correct)}</li>`;
+  }
+  html += '</ol></div>';
+  quizArea.innerHTML = html;
+  controls.innerHTML = `<button onclick="restart()">Coba Lagi</button>`;
+}
+
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// init
+renderQuestion(0);
 </script>
 </body>
 </html>
