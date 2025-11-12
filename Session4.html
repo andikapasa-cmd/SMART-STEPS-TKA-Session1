@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART STEPS - TKA Session 4 | Rahmad Andika Pasa, S.Pd.Gr.</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 40px; background: #f5f7fa; }
+  .container { max-width: 800px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  h1, h2 { text-align: center; }
+  button { background: #2a9d8f; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+  button:hover { background: #21867a; }
+  .question { margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>SMART STEPS</h1>
+  <h2>Session 4 - Summarizing Texts</h2>
+  <p><b>Disusun oleh:</b> Lina Puspita Dewi<br>
+  <b>Pengajar:</b> Rahmad Andika Pasa, S.Pd.Gr.</p>
+  <div id="quiz"></div>
+  <button onclick="submitQuiz()">Selesai</button>
+  <h2 id="result"></h2>
+</div>
+
+<script>
+const quizData = [
+  {question: "1. What is the main idea of a text about 'Healthy Living'?", a:"Eating junk food", b:"Doing regular exercise and balanced diet", c:"Sleeping late", d:"Skipping breakfast", e:"Watching TV all day", correct:"b"},
+  {question: "2. The summary of a long story should include ...", a:"Every detail", b:"Only main ideas", c:"All dialogues", d:"Descriptions only", e:"Background information", correct:"b"},
+  {question: "3. In summarizing, we should avoid ...", a:"Using our own words", b:"Copying sentences exactly", c:"Stating main ideas", d:"Simplifying language", e:"Reducing details", correct:"b"},
+  {question: "4. The purpose of summarizing is to ...", a:"Make the text longer", b:"Retell in detail", c:"Shorten and simplify the information", d:"Add more data", e:"Change the topic", correct:"c"},
+  {question: "5. Which of the following is the best summary of a text about pollution?", a:"Pollution affects health and environment; reducing waste helps.", b:"Pollution happens everywhere; water, air, soil.", c:"People throw garbage.", d:"Factories make smoke.", e:"Air is dirty.", correct:"a"},
+  {question: "6. In summarizing, what question helps identify the main idea?", a:"When did it happen?", b:"Who is the main character?", c:"What is the text mostly about?", d:"How long is the text?", e:"Where was it written?", correct:"c"},
+  {question: "7. To summarize effectively, we should ...", a:"Copy all sentences", b:"Ignore topic sentence", c:"Highlight key information", d:"Translate literally", e:"Add personal opinions", correct:"c"},
+  {question: "8. Summarizing means ...", a:"Telling the story again", b:"Finding key points and rewriting shortly", c:"Adding new details", d:"Explaining everything", e:"Copying paragraphs", correct:"b"},
+  {question: "9. Which sentence best represents the main idea of a paragraph about recycling?", a:"Recycling helps reduce waste and save energy.", b:"Some people recycle plastic bottles.", c:"We can recycle paper.", d:"Recycling is fun.", e:"Recycling bins are blue.", correct:"a"},
+  {question: "10. When writing a summary, your language should be ...", a:"Long and complex", b:"Short and clear", c:"Detailed and descriptive", d:"Full of examples", e:"Emotional", correct:"b"},
+  {question: "11. The first step in summarizing is ...", a:"Memorize all words", b:"Read and understand the text", c:"Count sentences", d:"Write conclusion first", e:"Skip reading", correct:"b"},
+  {question: "12. Which is NOT a good summary technique?", a:"Finding topic sentence", b:"Highlighting keywords", c:"Copy-pasting sentences", d:"Using own words", e:"Eliminating repetition", correct:"c"},
+  {question: "13. What does 'concise' mean in summarizing?", a:"Long and detailed", b:"Short and clear", c:"Hard to read", d:"Incomplete", e:"Repetitive", correct:"b"},
+  {question: "14. Which tool can help in summarizing texts?", a:"Dictionary", b:"Highlight marker", c:"Phone calculator", d:"Music player", e:"Alarm clock", correct:"b"},
+  {question: "15. What should a summary NOT include?", a:"Main idea", b:"Supporting ideas", c:"Minor details", d:"Topic sentence", e:"Key terms", correct:"c"},
+  {question: "16. A good summary usually consists of ...", a:"One paragraph covering main ideas", b:"Several pages", c:"Long quotations", d:"Many examples", e:"Detailed arguments", correct:"a"},
+  {question: "17. The phrase 'in short' indicates ...", a:"Beginning of a story", b:"Adding details", c:"Summarizing or concluding", d:"Contradicting ideas", e:"Changing topic", correct:"c"},
+  {question: "18. Which is the correct step order for summarizing?", a:"Write first, then read", b:"Read, find main idea, summarize", c:"Summarize before reading", d:"Add opinions", e:"Skip writing", correct:"b"},
+  {question: "19. A summary should be written using ...", a:"Personal feelings", b:"Objective and simple language", c:"Complex sentences", d:"Poetic words", e:"Metaphors", correct:"b"},
+  {question: "20. The word 'summarize' is closest in meaning to ...", a:"Explain", b:"Shorten", c:"Describe", d:"Expand", e:"Copy", correct:"b"}
+];
+
+function loadQuiz() {
+  const quizContainer = document.getElementById('quiz');
+  quizContainer.innerHTML = '';
+  quizData.forEach((q, i) => {
+    quizContainer.innerHTML += `
+      <div class='question'>
+        <p><b>${q.question}</b></p>
+        <label><input type='radio' name='q${i}' value='a'> A. ${q.a}</label><br>
+        <label><input type='radio' name='q${i}' value='b'> B. ${q.b}</label><br>
+        <label><input type='radio' name='q${i}' value='c'> C. ${q.c}</label><br>
+        <label><input type='radio' name='q${i}' value='d'> D. ${q.d}</label><br>
+        <label><input type='radio' name='q${i}' value='e'> E. ${q.e}</label>
+      </div>`;
+  });
+}
+
+function submitQuiz() {
+  let score = 0;
+  quizData.forEach((q, i) => {
+    const selected = document.querySelector(`input[name='q${i}']:checked`);
+    if (selected && selected.value === q.correct) score++;
+  });
+  document.getElementById('result').innerText = `Your score: ${score} / ${quizData.length}`;
+}
+
+loadQuiz();
+</script>
+</body>
+</html>
